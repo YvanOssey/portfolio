@@ -1,0 +1,2036 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yvan Ossey — Portfolio</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg: #06060A;
+            --surface: #0D0D14;
+            --surface2: #12121C;
+            --surface3: #18182A;
+            --cyan: #00FFC8;
+            --cyan-dim: rgba(0, 255, 200, 0.08);
+            --cyan-border: rgba(0, 255, 200, 0.15);
+            --purple: #9B5DE5;
+            --pink: #F72585;
+            --yellow: #FFE135;
+            --white: #EEEEF5;
+            --grey: #6E6E8A;
+            --grey2: #3A3A52;
+            --border: rgba(255, 255, 255, 0.05);
+            --border2: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ── SCROLLBAR ── */
+        ::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--cyan-border);
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 3rem;
+            background: rgba(6, 6, 10, 0.85);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--cyan);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .nav-logo-bracket {
+            opacity: 0.4;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--grey);
+            transition: color 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
+
+        .nav-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--cyan);
+            letter-spacing: 1px;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 8px var(--cyan);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                box-shadow: 0 0 4px var(--cyan);
+            }
+
+            50% {
+                box-shadow: 0 0 14px var(--cyan), 0 0 28px rgba(0, 255, 200, 0.3);
+            }
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 20px;
+            height: 1px;
+            background: var(--white);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            overflow: hidden;
+            padding-top: 72px;
+        }
+
+        /* Animated bg grid */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 255, 200, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 200, 0.03) 1px, transparent 1px);
+            background-size: 48px 48px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: 48px 48px;
+            }
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 200, 0.06) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            pointer-events: none;
+            animation: glowFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes glowFloat {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-30px, 40px);
+            }
+        }
+
+        .hero-glow2 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(155, 93, 229, 0.05) 0%, transparent 70%);
+            bottom: -50px;
+            left: 100px;
+            pointer-events: none;
+        }
+
+        /* Left */
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem 3rem 4rem 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-terminal {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--surface);
+            border: 1px solid var(--cyan-border);
+            padding: 0.5rem 1rem;
+            margin-bottom: 2.5rem;
+            width: fit-content;
+        }
+
+        .terminal-prompt {
+            color: var(--cyan);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+        }
+
+        .terminal-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--grey);
+        }
+
+        .terminal-cursor {
+            width: 8px;
+            height: 14px;
+            background: var(--cyan);
+            display: inline-block;
+            animation: blink-cursor 1s step-end infinite;
+        }
+
+        @keyframes blink-cursor {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        h1.hero-name {
+            font-family: 'Clash Display', sans-serif;
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .name-first {
+            display: block;
+            color: var(--white);
+        }
+
+        .name-last {
+            display: block;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .name-extra {
+            display: block;
+            font-size: 0.45em;
+            color: var(--grey);
+            -webkit-text-fill-color: var(--grey);
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hero-tagline {
+            font-size: 1rem;
+            color: var(--grey);
+            line-height: 1.8;
+            font-weight: 300;
+            max-width: 420px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-tagline strong {
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3.5rem;
+        }
+
+        .btn-primary {
+            background: var(--cyan);
+            color: #06060A;
+            padding: 0.9rem 2rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+            transition: all 0.2s;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .btn-primary:hover {
+            background: rgba(0, 255, 200, 0.85);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--cyan);
+            padding: 0.9rem 2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border: 1px solid var(--cyan-border);
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .btn-ghost:hover {
+            background: var(--cyan-dim);
+            border-color: var(--cyan);
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border2);
+        }
+
+        .hm-item {}
+
+        .hm-num {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--cyan);
+            line-height: 1;
+        }
+
+        .hm-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            color: var(--grey);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 0.2rem;
+        }
+
+        /* Right */
+        .hero-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            padding: 4rem 3rem;
+        }
+
+        .code-card {
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            width: 100%;
+            max-width: 440px;
+            font-family: 'JetBrains Mono', monospace;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(0, 255, 200, 0.05), 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .code-header {
+            background: var(--surface2);
+            padding: 0.8rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .code-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .code-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .cd-r {
+            background: #FF5F57;
+        }
+
+        .cd-y {
+            background: #FEBC2E;
+        }
+
+        .cd-g {
+            background: #28C840;
+        }
+
+        .code-filename {
+            font-size: 0.65rem;
+            color: var(--grey);
+            margin-left: 0.5rem;
+        }
+
+        .code-body {
+            padding: 1.5rem;
+            font-size: 0.75rem;
+            line-height: 1.9;
+        }
+
+        .c-comment {
+            color: #4A4A6A;
+            font-style: italic;
+        }
+
+        .c-kw {
+            color: #C792EA;
+        }
+
+        .c-fn {
+            color: #82AAFF;
+        }
+
+        .c-str {
+            color: #C3E88D;
+        }
+
+        .c-num {
+            color: #F78C6C;
+        }
+
+        .c-cyan {
+            color: var(--cyan);
+        }
+
+        .c-grey {
+            color: var(--grey);
+        }
+
+        .c-white {
+            color: var(--white);
+        }
+
+        .code-line {
+            display: block;
+        }
+
+        .code-indent {
+            padding-left: 1.2rem;
+            display: block;
+        }
+
+        .code-indent2 {
+            padding-left: 2.4rem;
+            display: block;
+        }
+
+        /* ── SECTIONS ── */
+        section {
+            padding: 7rem 3rem;
+        }
+
+        section.alt {
+            background: var(--surface);
+        }
+
+        .s-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--cyan);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .s-label::before {
+            content: '//';
+            opacity: 0.4;
+        }
+
+        h2.s-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: clamp(2.2rem, 4vw, 3.8rem);
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -0.5px;
+            margin-bottom: 0;
+        }
+
+        h2.s-title span {
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .s-desc {
+            font-size: 0.92rem;
+            color: var(--grey);
+            line-height: 1.8;
+            font-weight: 300;
+            max-width: 500px;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        /* ── ABOUT ── */
+        .about-text {
+            font-size: 0.93rem;
+            color: rgba(238, 238, 245, 0.65);
+            line-height: 1.9;
+            font-weight: 300;
+            margin-bottom: 1.2rem;
+        }
+
+        .about-text strong {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .about-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border2);
+            margin-top: 2rem;
+        }
+
+        .ac {
+            background: var(--bg);
+            padding: 1.2rem 1.4rem;
+            transition: background 0.2s;
+        }
+
+        .ac:hover {
+            background: var(--surface2);
+        }
+
+        .ac-k {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--grey);
+            margin-bottom: 0.35rem;
+        }
+
+        .ac-v {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--white);
+        }
+
+        /* ── SKILLS ── */
+        .skills-section {
+            padding: 7rem 3rem;
+        }
+
+        .skills-intro {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: start;
+            margin-bottom: 4rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1px;
+            background: var(--border2);
+            border: 1px solid var(--border2);
+        }
+
+        .skill-item {
+            background: var(--bg);
+            padding: 1.4rem 1.6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: background 0.25s;
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        .skill-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--c, var(--cyan));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .skill-item:hover {
+            background: var(--surface2);
+        }
+
+        .skill-item:hover::after {
+            transform: scaleX(1);
+        }
+
+        .skill-top {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-icon {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .skill-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .skill-name {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .skill-pct {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--c, var(--cyan));
+            margin-left: auto;
+        }
+
+        .skill-bar-wrap {
+            height: 2px;
+            background: var(--border2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--c, var(--cyan)), rgba(255, 255, 255, 0.3));
+            border-radius: 2px;
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ── PROJECTS ── */
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: var(--border2);
+            border: 1px solid var(--border2);
+            margin-top: 4rem;
+        }
+
+        .project-item {
+            background: var(--bg);
+            padding: 2.5rem 3rem;
+            display: grid;
+            grid-template-columns: 60px 1fr auto;
+            gap: 2.5rem;
+            align-items: center;
+            transition: background 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--cyan), var(--purple));
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 0.4s ease;
+        }
+
+        .project-item:hover {
+            background: var(--surface2);
+        }
+
+        .project-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .pi-num {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--border2);
+            line-height: 1;
+            transition: color 0.3s;
+        }
+
+        .project-item:hover .pi-num {
+            color: rgba(0, 255, 200, 0.12);
+        }
+
+        .pi-content {}
+
+        .pi-name {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+        }
+
+        .pi-desc {
+            font-size: 0.85rem;
+            color: var(--grey);
+            line-height: 1.65;
+            font-weight: 300;
+            max-width: 540px;
+            margin-bottom: 1rem;
+        }
+
+        .pi-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .pi-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            padding: 0.2rem 0.6rem;
+            border: 1px solid var(--border2);
+            color: var(--grey);
+            letter-spacing: 0.5px;
+        }
+
+        .pi-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--grey);
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--border2);
+            transition: all 0.2s;
+            white-space: nowrap;
+            letter-spacing: 1px;
+        }
+
+        .pi-link:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        /* ── CONTACT ── */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+            margin-top: 4rem;
+        }
+
+        .contact-big {
+            font-family: 'Clash Display', sans-serif;
+            font-size: clamp(2.5rem, 4.5vw, 4rem);
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-big span {
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-infos {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            margin-top: 2rem;
+        }
+
+        .ci {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.1rem 1.4rem;
+            background: var(--surface);
+            border-left: 2px solid transparent;
+            transition: border-color 0.2s;
+            gap: 1rem;
+        }
+
+        .ci:hover {
+            border-left-color: var(--cyan);
+        }
+
+        .ci-k {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--grey);
+        }
+
+        .ci-v {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--white);
+        }
+
+        .ci-v a {
+            color: var(--cyan);
+            text-decoration: none;
+        }
+
+        /* FORM */
+        .form-wrap {}
+
+        .fg {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .flbl {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--grey);
+        }
+
+        .fi,
+        .fta,
+        .fsel {
+            background: var(--surface);
+            border: 1px solid var(--border2);
+            color: var(--white);
+            padding: 0.85rem 1rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.2s;
+            width: 100%;
+        }
+
+        .fi:focus,
+        .fta:focus,
+        .fsel:focus {
+            border-color: var(--cyan);
+        }
+
+        .fi::placeholder,
+        .fta::placeholder {
+            color: var(--grey2);
+        }
+
+        .fta {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .frow {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .fsubmit {
+            width: 100%;
+            background: var(--cyan);
+            color: var(--bg);
+            padding: 1rem;
+            border: none;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            margin-top: 0.5rem;
+            clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+        }
+
+        .fsubmit:hover {
+            background: rgba(0, 255, 200, 0.85);
+        }
+
+        .form-success {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            text-align: center;
+            gap: 1rem;
+            background: var(--surface);
+            border: 1px solid var(--cyan-border);
+        }
+
+        .form-success.show {
+            display: flex;
+        }
+
+        .fs-icon {
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--cyan-dim);
+            border: 1px solid var(--cyan-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: popIn 0.4s ease;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            80% {
+                transform: scale(1.1);
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .fs-t {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cyan);
+        }
+
+        .fs-p {
+            font-size: 0.82rem;
+            color: var(--grey);
+            font-weight: 300;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border2);
+            padding: 2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--cyan);
+        }
+
+        .footer-copy {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--grey);
+            letter-spacing: 1px;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-nav a {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--grey);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-nav a:hover {
+            color: var(--cyan);
+        }
+
+        /* ── REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:1100px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(6, 6, 10, 0.98);
+                padding: 1.5rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-status {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .hero-right {
+                display: none;
+            }
+
+            .hero-left {
+                padding: 5rem 1.5rem 4rem;
+            }
+
+            section {
+                padding: 5rem 1.5rem;
+            }
+
+            .skills-section {
+                padding: 5rem 1.5rem;
+            }
+
+            .two-col,
+            .skills-intro {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .project-item {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 2rem 1.5rem;
+            }
+
+            .pi-num {
+                font-size: 2rem;
+            }
+
+            .pi-link {
+                align-self: flex-start;
+            }
+        }
+
+        .hero-photo-wrap {
+            position: relative;
+            width: 300px;
+            height: 380px;
+            flex-shrink: 0;
+        }
+
+        .hero-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+            border: 1px solid var(--cyan-border);
+            display: block;
+        }
+
+        .hero-photo-glow {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 255, 200, 0.18) 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        .hero-photo-badge {
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg);
+            border: 1px solid var(--cyan-border);
+            padding: 0.35rem 1.1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--cyan);
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        @media(max-width:700px) {
+            h1.hero-name {
+                font-size: 2.8rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-ghost {
+                width: 100%;
+                text-align: center;
+            }
+
+            .about-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .frow {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-nav {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="#" class="nav-logo">
+            <span class="nav-logo-bracket">[</span>yvan.dev<span class="nav-logo-bracket">]</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#skills">Compétences</a></li>
+            <li><a href="#projects">Projets</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-status">
+            <div class="status-dot"></div>
+            Disponible
+        </div>
+        <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"
+            aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-glow2"></div>
+
+        <div class="hero-left">
+            <div class="hero-terminal">
+                <span class="terminal-prompt">~/portfolio $</span>
+                <span class="terminal-text">whoami</span>
+                <span class="terminal-cursor"></span>
+            </div>
+
+            <h1 class="hero-name">
+                <span class="name-first">Ossey</span>
+                <span class="name-last">Yvan</span>
+                <span class="name-extra">Jean De Kenty</span>
+            </h1>
+
+            <p class="hero-tagline">
+                Étudiant en <strong>Licence 2 MIAGE</strong> · Développeur web freelance.<br>
+                Je conçois des interfaces web modernes,<br>rapides et mémorables.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#projects" class="btn-primary">Voir mes projets</a>
+                <a href="#contact" class="btn-ghost">Me contacter</a>
+            </div>
+
+            <div class="hero-meta">
+                <div class="hm-item">
+                    <div class="hm-num">4</div>
+                    <div class="hm-label">Projets</div>
+                </div>
+                <div class="hm-item">
+                    <div class="hm-num">14</div>
+                    <div class="hm-label">Technologies</div>
+                </div>
+                <div class="hm-item">
+                    <div class="hm-num">L2</div>
+                    <div class="hm-label">MIAGE</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="hero-photo-wrap">
+                <img src="image/ma_photo.jpg" alt="Ossey Yvan Jean De Kenty" class="hero-photo" />
+                <div class="hero-photo-glow"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="alt">
+        <div class="two-col">
+            <div class="reveal">
+                <div class="s-label">À propos</div>
+                <h2 class="s-title">Qui<br>suis-<span>je ?</span></h2>
+            </div>
+            <div class="reveal">
+                <p class="about-text">Je m'appelle <strong>Ossey Yvan Jean De Kenty</strong>, étudiant en
+                    <strong>Licence 2 de MIAGE </strong> — <strong>M</strong>éthodes <strong>I</strong>nformatiques
+                    <strong>A</strong>ppliquées à la <strong>G</strong>estion des <strong>E</strong>ntreprises à
+                    <strong>l'Université Polytechnique de Bingerville.</strong>
+                </p>
+                <p class="about-text">Autodidacte passionné, je développe des projets web concrets depuis le début de ma
+                    formation : sites e-commerce, plateformes institutionnelles, interfaces modernes. Mon approche mêle
+                    rigueur technique et sens du design.</p>
+                <p class="about-text">Objectif : devenir un <strong>développeur full-stack</strong> polyvalent, capable
+                    de créer des solutions digitales à impact réel.</p>
+                <div class="about-cards">
+                    <div class="ac">
+                        <div class="ac-k">Formation</div>
+                        <div class="ac-v">Licence 2 MIAGE</div>
+                    </div>
+                    <div class="ac">
+                        <div class="ac-k">Statut</div>
+                        <div class="ac-v">Étudiant</div>
+                    </div>
+                    <div class="ac">
+                        <div class="ac-k">Projets réalisés</div>
+                        <div class="ac-v">4 projets web</div>
+                    </div>
+                    <div class="ac">
+                        <div class="ac-k">Disponibilité</div>
+                        <div class="ac-v" style="color:var(--cyan)">✓ Disponible</div>
+                    </div>
+                    <div class="ac">
+                        <div class="ac-k">GitHub</div>
+                        <div class="ac-v"><a href="https://github.com/YvanOssey" target="_blank"
+                                style="color:var(--cyan);text-decoration:none;">@YvanOssey</a></div>
+                    </div>
+                    <div class="ac">
+                        <div class="ac-k">Technologies</div>
+                        <div class="ac-v">14 maîtrisées</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="skills-section">
+        <div class="skills-intro reveal">
+            <div>
+                <div class="s-label">Compétences</div>
+                <h2 class="s-title">Mon<br><span>stack</span></h2>
+            </div>
+            <p class="s-desc">14 technologies maîtrisées à différents niveaux, du développement front-end au design, en
+                passant par les bases de données et la gestion de versions.</p>
+        </div>
+
+        <div class="skills-grid" id="skillsGrid">
+
+            <!-- HTML/CSS 80% -->
+            <div class="skill-item" style="--c:#E44D26">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 2L7.6 31L19.8 34.5L32 31L34.6 2H5Z" fill="#E44D26" />
+                            <path d="M20 31.8V5H31.8L34.6 2H5L7.6 31L20 31.8Z" fill="#F16529" />
+                            <path
+                                d="M20 16.2H14.6L14.2 11.8H20V7.8H9.8L10.7 18.2H20V16.2ZM20 26.6L15.8 25.5L15.5 22H11.5L12.1 28.5L20 31V26.6Z"
+                                fill="#EBEBEB" />
+                            <path
+                                d="M20 16.2V20.2H25.6L25.1 26.6L20 27.8V31L27.9 28.5L28.1 26L29.1 16.2H20ZM20 7.8V11.8H30.1L30.4 8.6L30.6 7.8H20Z"
+                                fill="white" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">HTML / CSS</span>
+                    <span class="skill-pct">80%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="80"></div>
+                </div>
+            </div>
+
+            <!-- JavaScript 50% -->
+            <div class="skill-item" style="--c:#F7DF1E">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="40" height="40" rx="3" fill="#F7DF1E" />
+                            <path
+                                d="M24 29.5c.75 1.25 1.75 2.1 3.5 2.1 1.5 0 2.4-.75 2.4-1.75 0-1.25-1-1.65-2.5-2.35l-.85-.38c-2.5-1.05-4.15-2.35-4.15-5.1 0-2.55 1.85-4.5 4.85-4.5 2.1 0 3.6.75 4.7 2.65l-2.6 1.7c-.6-1.1-1.25-1.55-2.1-1.55-1 0-1.6.6-1.6 1.5 0 1.05.6 1.4 2.1 2.1l.85.38C31.4 25.3 33 26.6 33 29.5c0 3.1-2.35 4.75-5.5 4.75-3.1 0-5.1-1.5-6.1-3.5L24 29.5zM13.5 29.8c.5 1 1 1.75 2.1 1.75 1.1 0 1.75-.38 1.75-2V17.5H21V29.6c0 3.3-2 4.9-4.85 4.9-2.6 0-4.1-1.35-4.9-3L13.5 29.8z"
+                                fill="#323330" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">JavaScript</span>
+                    <span class="skill-pct">50%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="50"></div>
+                </div>
+            </div>
+
+            <!-- PHP 50% -->
+            <div class="skill-item" style="--c:#8892BF">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="20" cy="20" rx="19" ry="12" fill="#8892BF" />
+                            <path
+                                d="M10.5 14.5h3.5l1.2 5.5 1.2-5.5h3.5l-2.8 11H14L13.5 22l-.5 3.5H10L10.5 14.5zm12 0h5.5c1.8 0 3 1.2 3 3s-1.2 3-3 3h-2.5l-.8 5H22L24.5 14.5zm4.8 2H25l-.5 2.5h2.3c.6 0 .9-.4.9-.9v-.7c0-.5-.4-.9-.9-.9z"
+                                fill="white" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">PHP</span>
+                    <span class="skill-pct">50%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="50"></div>
+                </div>
+            </div>
+
+            <!-- React 30% -->
+            <div class="skill-item" style="--c:#61DAFB">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="3.5" fill="#61DAFB" />
+                            <ellipse cx="20" cy="20" rx="18" ry="7" stroke="#61DAFB" stroke-width="1.5" fill="none" />
+                            <ellipse cx="20" cy="20" rx="18" ry="7" stroke="#61DAFB" stroke-width="1.5" fill="none"
+                                transform="rotate(60 20 20)" />
+                            <ellipse cx="20" cy="20" rx="18" ry="7" stroke="#61DAFB" stroke-width="1.5" fill="none"
+                                transform="rotate(120 20 20)" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">React</span>
+                    <span class="skill-pct">30%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="30"></div>
+                </div>
+            </div>
+
+            <!-- Java 20% -->
+            <div class="skill-item" style="--c:#E76F00">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M15 27s-1.8 1.1 1.3 1.5c3.9.5 5.9.4 10.2-.4 0 0 1.1.7 2.7 1.3-9.5 4.1-21.5-.2-14.2-2.4zm-1.2-5.8s-2 1.5 1.1 1.8c4 .5 7.2.5 12.7-.6 0 0 .8.7 2 1.2-11.2 3.3-23.7.3-15.8-2.4z"
+                                fill="#E76F00" />
+                            <path
+                                d="M21.4 14.8c2.3 2.6-.6 4.9-.6 4.9s5.7-2.9 3.1-6.6c-2.5-3.4-4.3-5.1 5.8-11 0 0-15.8 3.9-8.3 12.7z"
+                                fill="#E76F00" />
+                            <path
+                                d="M30.3 30.7s1.3 1.2-1.5 2.1c-5.5 1.7-22.8 2.2-27.6 0-1.7-.8.5-1.8 1.8-2.1.7-.1 1.1-.1 1.1-.1C2.9 29 -4.3 32.4.1 33.2c12.8 2.1 23.3-1 29.7-2.3 0 0-.1-.2.5-.2zm-12.3-9.5s-5.6 1.3-2 1.8c1.5.2 4.5.1 7.3-.1 2.3-.2 4.5-.6 4.5-.6s-.8.4-1.4.7c-5.6 1.5-16.5.7-13.3-.7 2.7-1.2 4.9-1.1 4.9-1.1zm9.7 5.4c5.6-2.9 3-5.7 1.1-5.4-.5.1-.7.2-.7.2s.2-.3.5-.4c3.9-1.4 6.9 4.1-1.2 6.2 0 0 .1-.1.3-.6z"
+                                fill="#E76F00" />
+                            <path
+                                d="M23.3 2.5s3.2 3.2-3.1 8c-5 4-1.1 6.3 0 8.9-2.9-2.7-5.1-5-3.7-7.2 2.1-3.3 8-4.9 6.8-9.7z"
+                                fill="#E76F00" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">Java</span>
+                    <span class="skill-pct">20%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="20"></div>
+                </div>
+            </div>
+
+            <!-- SQL 60% -->
+            <div class="skill-item" style="--c:#00AAD4">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="20" cy="11" rx="14" ry="6" fill="#00618A" />
+                            <path d="M6 11v6c0 3.3 6.3 6 14 6s14-2.7 14-6V11c0 3.3-6.3 6-14 6S6 14.3 6 11z"
+                                fill="#00618A" />
+                            <path d="M6 17v6c0 3.3 6.3 6 14 6s14-2.7 14-6V17c0 3.3-6.3 6-14 6S6 20.3 6 17z"
+                                fill="#00618A" />
+                            <ellipse cx="20" cy="11" rx="14" ry="6" stroke="#00AAD4" stroke-width="1.2" fill="none" />
+                            <path d="M34 11v18c0 3.3-6.3 6-14 6S6 32.3 6 29V11" stroke="#00AAD4" stroke-width="1.2"
+                                fill="none" />
+                            <path d="M6 17c0 3.3 6.3 6 14 6s14-2.7 14-6M6 23c0 3.3 6.3 6 14 6s14-2.7 14-6"
+                                stroke="#00AAD4" stroke-width="1.2" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">SQL</span>
+                    <span class="skill-pct">60%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="60"></div>
+                </div>
+            </div>
+
+            <!-- Bootstrap 50% -->
+            <div class="skill-item" style="--c:#7952B3">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="40" height="40" rx="8" fill="#7952B3" />
+                            <path
+                                d="M10 9h12c5.5 0 8.5 2.5 8.5 7 0 2.5-1.2 4.3-3.2 5.3 2.7.9 4.5 3.1 4.5 5.9 0 4.8-3.5 7.5-9.2 7.5H10V9zm5.5 10h6.5c2.3 0 3.5-1.1 3.5-2.9 0-1.9-1.2-2.8-3.5-2.8H15.5V19zm0 10h7c2.3 0 3.7-1.2 3.7-3.2 0-1.9-1.4-3.1-3.7-3.1H15.5V29z"
+                                fill="white" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">Bootstrap</span>
+                    <span class="skill-pct">50%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="50"></div>
+                </div>
+            </div>
+
+            <!-- Tailwind 50% -->
+            <div class="skill-item" style="--c:#38BDF8">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M20 8C14.7 8 11.3 10.7 10 16c1.8-2.5 4-3.5 6.5-2.8 1.4.4 2.4 1.5 3.5 2.7 1.8 1.8 3.9 4 8.5 4 5.3 0 8.7-2.7 10-8-1.8 2.5-4 3.5-6.5 2.8-1.4-.4-2.4-1.5-3.5-2.7C26.7 10.2 24.6 8 20 8zm-10 12c-5.3 0-8.7 2.7-10 8 1.8-2.5 4-3.5 6.5-2.8 1.4.4 2.4 1.5 3.5 2.7 1.8 1.8 3.9 4 8.5 4 5.3 0 8.7-2.7 10-8-1.8 2.5-4 3.5-6.5 2.8-1.4-.4-2.4-1.5-3.5-2.7C16.7 22.2 14.6 20 10 20z"
+                                fill="#38BDF8" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">Tailwind CSS</span>
+                    <span class="skill-pct">50%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="50"></div>
+                </div>
+            </div>
+
+            <!-- Python 70% -->
+            <div class="skill-item" style="--c:#FFD43B">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M19.9 2.5C14.8 2.5 15.2 4.8 15.2 4.8v4.7H20v1.5H11.3s-4 .5-4 5.5 3.5 4.8 3.5 4.8H13v-2.3s-.1-3.5 3.5-3.5h7.5s3.3 0 3.3-3.2V6.8s.5-4.3-7.4-4.3zM17.5 4.9c.7 0 1.3.6 1.3 1.3s-.6 1.3-1.3 1.3-1.3-.6-1.3-1.3.6-1.3 1.3-1.3z"
+                                fill="#366994" />
+                            <path
+                                d="M20.1 37.5c5.1 0 4.7-2.3 4.7-2.3V30.5H20V29h8.7s4-.5 4-5.5-3.5-4.8-3.5-4.8H27v2.3s.1 3.5-3.5 3.5h-7.5s-3.3 0-3.3 3.2V33s-.5 4.5 7.4 4.5zM22.5 35.1c-.7 0-1.3-.6-1.3-1.3s.6-1.3 1.3-1.3 1.3.6 1.3 1.3-.6 1.3-1.3 1.3z"
+                                fill="#FFD43B" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">Python</span>
+                    <span class="skill-pct">70%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="70"></div>
+                </div>
+            </div>
+
+            <!-- C 50% -->
+            <div class="skill-item" style="--c:#5C7AEA">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="40" height="40" rx="4" fill="#283593" />
+                            <path
+                                d="M26.5 25.5c-.7 1.2-1.8 2.2-3.1 2.8-1.3.6-2.7.9-4.1.9-1.8 0-3.4-.4-4.8-1.2-1.4-.8-2.4-1.9-3.2-3.3-.7-1.4-1.1-2.9-1.1-4.6 0-1.7.4-3.3 1.1-4.7.8-1.4 1.8-2.5 3.2-3.3 1.4-.8 3-1.2 4.8-1.2 1.4 0 2.7.3 3.9.8 1.2.5 2.2 1.3 3 2.3l-2.5 2.2c-1-1.3-2.3-2-3.9-2-1.1 0-2 .3-2.8.8-.8.5-1.4 1.2-1.8 2.1-.4.9-.6 1.9-.6 3s.2 2.1.6 3c.4.9 1 1.6 1.8 2.1.8.5 1.8.8 2.8.8 1.7 0 3-.7 4-2.2l2.7 1.7z"
+                                fill="white" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">Langage C</span>
+                    <span class="skill-pct">50%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="50"></div>
+                </div>
+            </div>
+
+            <!-- Git 60% -->
+            <div class="skill-item" style="--c:#F05033">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M37 18.2L21.8 3a1.9 1.9 0 00-2.7 0L16 6.1l3.8 3.8a2.3 2.3 0 012.9 2.9L26.2 16a2.3 2.3 0 11-1.4 2.2 2.3 2.3 0 01.2-.9L21.8 14v8.9a2.3 2.3 0 11-2.8.1V13.8a2.3 2.3 0 01-1.3-3L14 7l-11 11.1a1.9 1.9 0 000 2.7L18.2 36a1.9 1.9 0 002.7 0L37 20.9a1.9 1.9 0 000-2.7z"
+                                fill="#F05033" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">Git</span>
+                    <span class="skill-pct">60%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="60"></div>
+                </div>
+            </div>
+
+            <!-- GitHub 60% -->
+            <div class="skill-item" style="--c:#ffffff">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M20 2.5C10.3 2.5 2.5 10.3 2.5 20c0 7.7 5 14.2 11.9 16.5.9.1 1.2-.4 1.2-.8v-2.7c-4.8 1-5.8-2.3-5.8-2.3-.8-2-1.9-2.5-1.9-2.5-1.6-1 .1-1 .1-1 1.7.1 2.6 1.8 2.6 1.8 1.5 2.6 4 1.8 5 1.4.1-1.1.6-1.8 1.1-2.2-3.8-.4-7.7-1.9-7.7-8.5 0-1.9.7-3.4 1.7-4.6-.2-.4-.7-2.2.2-4.5 0 0 1.4-.5 4.6 1.7a16.1 16.1 0 018.5 0c3.2-2.2 4.6-1.7 4.6-1.7.9 2.3.3 4.1.2 4.5 1 1.2 1.7 2.7 1.7 4.6 0 6.6-4 8.1-7.8 8.5.6.5 1.1 1.5 1.1 3.1v4.6c0 .4.3.9 1.2.8C33 34.2 38 27.7 38 20c0-9.7-7.8-17.5-18-17.5z"
+                                fill="white" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">GitHub</span>
+                    <span class="skill-pct">60%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="60"></div>
+                </div>
+            </div>
+
+            <!-- Figma 70% -->
+            <div class="skill-item" style="--c:#A259FF">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.3 35c3 0 5.3-2.4 5.3-5.3V24H13.3a5.3 5.3 0 000 10.7v.3z" fill="#0ACF83" />
+                            <path d="M8 20a5.3 5.3 0 015.3-5.3H18.6V25.3H13.3A5.3 5.3 0 018 20z" fill="#A259FF" />
+                            <path d="M8 9.3A5.3 5.3 0 0113.3 4H18.6v10.7H13.3A5.3 5.3 0 018 9.3z" fill="#F24E1E" />
+                            <path d="M18.6 4H24a5.3 5.3 0 010 10.7H18.6V4z" fill="#FF7262" />
+                            <path d="M29.3 20a5.3 5.3 0 11-10.7 0 5.3 5.3 0 0110.7 0z" fill="#1ABCFE" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">Figma</span>
+                    <span class="skill-pct">70%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="70"></div>
+                </div>
+            </div>
+
+            <!-- Canva 80% -->
+            <div class="skill-item" style="--c:#9B59B6">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="18" fill="#7D2AE8" />
+                            <path
+                                d="M25.8 24.8c-.6 1-1.8 1.9-3.2 1.9-2.5 0-4.3-1.9-4.3-5.6s1.8-5.6 4.3-5.6c1.2 0 2.3.7 3 1.8l2.5-1.8c-1.3-2-3.2-3.2-5.5-3.2-4.1 0-7.5 3.4-7.5 8.8s3.4 8.8 7.5 8.8c2.4 0 4.4-1.2 5.6-3.1l-2.4-2z"
+                                fill="white" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">Canva</span>
+                    <span class="skill-pct">80%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="80"></div>
+                </div>
+            </div>
+
+
+            <!-- Node.js -->
+            <div class="skill-item" style="--c:#539E43">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="18" fill="#1a1a1a" />
+                            <path d="M20 8l10.5 6v12L20 32 9.5 26V14L20 8z" fill="#539E43" />
+                            <path d="M20 11.5l7.5 4.3v8.4L20 28.5l-7.5-4.3v-8.4L20 11.5z" fill="#1a1a1a" />
+                            <path d="M20 14.5v11M14.5 17.5l5.5 3 5.5-3" stroke="#539E43" stroke-width="1.5"
+                                stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">Node.js</span>
+                    <span class="skill-pct">20%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="20"></div>
+                </div>
+            </div>
+
+
+            <!-- Express.js -->
+            <div class="skill-item" style="--c:#ffffff">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="18" fill="#1a1a1a" />
+                            <text x="7" y="24" font-family="monospace" font-size="10" font-weight="bold"
+                                fill="white">Ex.</text>
+                        </svg>
+                    </div>
+                    <span class="skill-name">Express.js</span>
+                    <span class="skill-pct">20%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="20"></div>
+                </div>
+            </div>
+
+
+
+            <!-- JWT -->
+            <div class="skill-item" style="--c:#D63AFF">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="18" fill="#1a1a1a" />
+                            <text x="8" y="25" font-family="monospace" font-size="11" font-weight="bold"
+                                fill="#D63AFF">JWT</text>
+                        </svg>
+                    </div>
+                    <span class="skill-name">JWT</span>
+                    <span class="skill-pct">20%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="20"></div>
+                </div>
+            </div>
+
+            <!-- Bcrypt.js -->
+            <div class="skill-item" style="--c:#E8A838">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="18" fill="#1a1a1a" />
+                            <rect x="13" y="17" width="14" height="11" rx="2" stroke="#E8A838" stroke-width="1.5" />
+                            <path d="M15 17v-3a5 5 0 0110 0v3" stroke="#E8A838" stroke-width="1.5"
+                                stroke-linecap="round" />
+                            <circle cx="20" cy="22" r="2" fill="#E8A838" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">Bcrypt.js</span>
+                    <span class="skill-pct">10%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="10"></div>
+                </div>
+            </div>
+
+            <!-- Dotenv -->
+            <div class="skill-item" style="--c:#ECD53F">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="18" fill="#1a1a1a" />
+                            <text x="8" y="25" font-family="monospace" font-size="9" font-weight="bold"
+                                fill="#ECD53F">.env</text>
+                        </svg>
+                    </div>
+                    <span class="skill-name">Dotenv</span>
+                    <span class="skill-pct">10%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="10"></div>
+                </div>
+            </div>
+
+            <!-- Vite -->
+            <div class="skill-item" style="--c:#BD34FE">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="18" fill="#1a1a1a" />
+                            <path d="M28 11L19 26l-2-7-6 3 9-15 2 7 6-3z" fill="#BD34FE" />
+                            <path d="M19 26l-2-7" stroke="#FFC920" stroke-width="1.2" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">Vite</span>
+                    <span class="skill-pct">20%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="20"></div>
+                </div>
+            </div>
+
+            <!-- REST API -->
+            <div class="skill-item" style="--c:#00C8A0">
+                <div class="skill-top">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="20" r="18" fill="#1a1a1a" />
+                            <path d="M12 20h16M24 14l6 6-6 6" stroke="#00C8A0" stroke-width="1.8" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <span class="skill-name">REST API</span>
+                    <span class="skill-pct">20%</span>
+                </div>
+                <div class="skill-bar-wrap">
+                    <div class="skill-bar-fill" data-pct="20"></div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="alt">
+        <div class="reveal">
+            <div class="s-label">Réalisations</div>
+            <h2 class="s-title">Mes <span>projets</span></h2>
+        </div>
+
+        <div class="projects-list reveal">
+
+            <div class="project-item">
+                <div class="pi-num">01</div>
+                <div class="pi-content">
+                    <div class="pi-name">OBVX — Boutique E-commerce</div>
+                    <div class="pi-desc">Site de vente en ligne pour une marque de t-shirts. Catalogue produits, panier
+                        d'achat dynamique, interface responsive et expérience utilisateur fluide et moderne.</div>
+                    <div class="pi-tags">
+                        <span class="pi-tag">HTML5</span>
+                        <span class="pi-tag">CSS3</span>
+                        <span class="pi-tag">JavaScript</span>
+                        <span class="pi-tag">E-commerce</span>
+                        <span class="pi-tag">Responsive</span>
+                    </div>
+                </div>
+                <a href="https://github.com/YvanOssey/obvx" target="_blank" class="pi-link">↗ GitHub</a>
+            </div>
+
+            <div class="project-item">
+                <div class="pi-num">02</div>
+                <div class="pi-content">
+                    <div class="pi-name">OBC — Olympique Basket Club</div>
+                    <div class="pi-desc">Site institutionnel pour un club de basketball. Présentation des équipes,
+                        agenda des matchs, palmarès et formulaire d'inscription avec intégration Formspree.</div>
+                    <div class="pi-tags">
+                        <span class="pi-tag">HTML5</span>
+                        <span class="pi-tag">CSS3</span>
+                        <span class="pi-tag">JavaScript</span>
+                        <span class="pi-tag">Formspree</span>
+                        <span class="pi-tag">UI Design</span>
+                    </div>
+                </div>
+                <a href="https://github.com/YvanOssey/OBC" target="_blank" class="pi-link">↗ GitHub</a>
+            </div>
+
+            <div class="project-item">
+                <div class="pi-num">03</div>
+                <div class="pi-content">
+                    <div class="pi-name">AEC — Athlétic Élites Club</div>
+                    <div class="pi-desc">Site web premium pour un club de basketball. Design sombre et dynamique,
+                        sections équipes, tarifs et galerie photo. Architecture 100% responsive, mobile-first.</div>
+                    <div class="pi-tags">
+                        <span class="pi-tag">HTML5</span>
+                        <span class="pi-tag">CSS3</span>
+                        <span class="pi-tag">JavaScript</span>
+                        <span class="pi-tag">Mobile-first</span>
+                        <span class="pi-tag">UI/UX</span>
+                    </div>
+                </div>
+                <a href="https://github.com/YvanOssey/Athl-tic-Elite-Club" target="_blank" class="pi-link">↗ GitHub</a>
+            </div>
+
+            <div class="project-item">
+                <div class="pi-num">04</div>
+                <div class="pi-content">
+                    <div class="pi-name">Portfolio Professionnel — Yvan.Dev</div>
+                    <div class="pi-desc">Portfolio développeur dark-theme conçu de A à Z. Animations au scroll,
+                        compétences interactives avec barres de progression, formulaire de contact intégré et design
+                        terminal / code unique.</div>
+                    <div class="pi-tags">
+                        <span class="pi-tag">HTML5</span>
+                        <span class="pi-tag">CSS3</span>
+                        <span class="pi-tag">JavaScript</span>
+                        <span class="pi-tag">UI/UX</span>
+                        <span class="pi-tag">Dark Theme</span>
+                        <span class="pi-tag">Animations</span>
+                    </div>
+                </div>
+                <a href="#" class="pi-link" style="color: #E07B39; border-color: #E07B39;">↗ En cours</a>
+            </div>
+
+
+
+            <div class="project-item">
+                <div class="pi-num">05</div>
+                <div class="pi-content">
+                    <div class="pi-name">ResiManage CI — Plateforme SaaS Immobilière</div>
+                    <div class="pi-desc">Application SaaS de gestion immobilière conçue pour le marché
+                        ivoirien.
+                        Gestion des résidences, appartements, locataires et paiements. Génération de reçus PDF,
+                        export Excel, tableau de bord avec graphiques, alertes impayés et authentification JWT
+                        sécurisée.</div>
+                    <div class="pi-tags">
+                        <span class="pi-tag">Node.js</span>
+                        <span class="pi-tag">Express.js</span>
+                        <span class="pi-tag">MySQL</span>
+                        <span class="pi-tag">React</span>
+                        <span class="pi-tag">JWT</span>
+                        <span class="pi-tag">REST API</span>
+                        <span class="pi-tag">PDFKit</span>
+                        <span class="pi-tag">Recharts</span>
+                        <span class="pi-tag">MVC</span>
+                    </div>
+                </div>
+                <a href="#" class="pi-link" style="color: #E07B39; border-color: #E07B39;">↗ En cours</a>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="reveal">
+            <div class="s-label">Contact</div>
+            <h2 class="s-title">Travaillons <span>ensemble</span></h2>
+        </div>
+        <div class="contact-grid reveal">
+            <div>
+                <div class="contact-big">Vous avez un<br><span>projet ?</span></div>
+                <p class="s-desc">Disponible pour des missions freelance, des stages ou des collaborations académiques.
+                    N'hésitez pas à me contacter.</p>
+                <div class="contact-infos">
+                    <div class="ci">
+                        <span class="ci-k">Email</span>
+                        <span class="ci-v"><a href="mailto:yvanossey6@gmail.com">yvanossey6@gmail.com</a></span>
+                    </div>
+                    <div class="ci">
+                        <span class="ci-k">GitHub</span>
+                        <span class="ci-v"><a href="https://github.com/YvanOssey"
+                                target="_blank">github.com/YvanOssey</a></span>
+                    </div>
+                    <div class="ci">
+                        <span class="ci-k">Statut</span>
+                        <span class="ci-v" style="color:var(--cyan)">✓ Disponible</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-wrap">
+                <div id="contactForm">
+                    <div class="frow">
+                        <div class="fg"><label class="flbl">Prénom *</label><input class="fi" id="c-prenom" type="text"
+                                placeholder="Jean"></div>
+                        <div class="fg"><label class="flbl">Nom *</label><input class="fi" id="c-nom" type="text"
+                                placeholder="yvan"></div>
+                    </div>
+                    <div class="fg"><label class="flbl">Email *</label><input class="fi" id="c-email" type="email"
+                            placeholder="jean@gmail.com"></div>
+                    <div class="fg"><label class="flbl">Sujet</label><input class="fi" id="c-sujet" type="text"
+                            placeholder="Projet freelance, stage..."></div>
+                    <div class="fg"><label class="flbl">Message *</label><textarea class="fta" id="c-msg"
+                            placeholder="Décrivez votre projet..."></textarea></div>
+                    <button class="fsubmit" onclick="sendMsg()">Envoyer le message →</button>
+                </div>
+                <div class="form-success" id="formOk">
+                    <div class="fs-icon">✓</div>
+                    <div class="fs-t">Message envoyé !</div>
+                    <p class="fs-p">Je vous répondrai dans les plus brefs délais.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo"><span style="opacity:.4">[</span>yvan.dev<span style="opacity:.4">]</span></div>
+        <div class="footer-copy">© 2026 — Ossey Yvan Jean De Kenty · Tous droits réservés</div>
+        <nav class="footer-nav">
+            <a href="https://github.com/YvanOssey" target="_blank">GitHub</a>
+            <a href="#about">À propos</a>
+            <a href="#skills">Stacks</a>
+            <a href="#projects">Projets</a>
+            <a href="#contact">Contacts</a>
+        </nav>
+    </footer>
+
+    <script>
+        // Nav mobile
+        document.querySelectorAll('.nav-links a').forEach(l => {
+            l.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+        });
+
+        // Skill bars animation on scroll
+        const skillObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+                        setTimeout(() => { bar.style.width = bar.dataset.pct + '%'; }, 200);
+                    });
+                    skillObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.skills-grid').forEach(g => skillObs.observe(g));
+
+        // Reveal
+        const revObs = new IntersectionObserver((entries) => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
+            });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+        // Contact form
+        const FP = 'https://formspree.io/f/xqedvdyy';
+        async function sendMsg() {
+            const p = document.getElementById('c-prenom').value.trim();
+            const n = document.getElementById('c-nom').value.trim();
+            const e = document.getElementById('c-email').value.trim();
+            const m = document.getElementById('c-msg').value.trim();
+            let ok = true;
+            [[p, 'c-prenom'], [n, 'c-nom'], [e, 'c-email'], [m, 'c-msg']].forEach(([v, id]) => {
+                document.getElementById(id).style.borderColor = !v ? 'var(--cyan)' : 'var(--border2)';
+                if (!v) ok = false;
+            });
+            if (!ok) return;
+            const btn = document.querySelector('.fsubmit');
+            btn.textContent = 'Envoi...'; btn.disabled = true; btn.style.opacity = '0.6';
+            try {
+                const res = await fetch(FP, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({ prenom: p, nom: n, email: e, sujet: document.getElementById('c-sujet').value, message: m })
+                });
+                if (res.ok) {
+                    document.getElementById('contactForm').style.display = 'none';
+                    document.getElementById('formOk').classList.add('show');
+                } else { btn.textContent = 'Envoyer →'; btn.disabled = false; btn.style.opacity = '1'; alert('Erreur. Réessayez.'); }
+            } catch { btn.textContent = 'Envoyer →'; btn.disabled = false; btn.style.opacity = '1'; alert('Erreur réseau.'); }
+        }
+    </script>
+</body>
+
+</html>
